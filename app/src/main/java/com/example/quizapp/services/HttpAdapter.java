@@ -43,6 +43,29 @@ public class HttpAdapter {
                 .build();
         return retrofit.create(RequestFriends.class);
     }
+
+    public static RequestUserInfo apiAdapterUserInfo(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(RequestUserInfo.class);
+    }
+
+    public static RequestPasswordChange apiAdapterPasswordChange(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(RequestPasswordChange.class);
+    }
+
+    public static RequestPurchase apiAdapterPurchase(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(RequestPurchase.class);
+    }
+
 }
-
-

@@ -36,7 +36,7 @@ public class BalanceService implements RequestBalance {
                 }else if (response.code() == 401){
                     Toast.makeText(ctx, "Token has been expired. Log in again", Toast.LENGTH_SHORT).show();
                     new TokenStorage(ctx).removeToken();
-                    ((FragmentDisplay) ctx).loadFragment(RegisterFragment.class, true);
+                    ((FragmentDisplay) ctx).loadFragment(RegisterFragment.class);
                 }else {
                     Toast.makeText(ctx, "Something went wrong. Try again later", Toast.LENGTH_SHORT).show();
                 }

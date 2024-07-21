@@ -50,19 +50,19 @@ public class StartQuizFragment extends Fragment implements AdapterView.OnItemSel
         Spinner spinnerTopic = view.findViewById(R.id.dropdown_menu_topic);
         Spinner spinnerQuestions = view.findViewById(R.id.dropdown_menu_questionum);
 
-        String[] topics = { "Animals", "Brainteasers", "Entertainment", "For Kids",
+        String[] topics = { "Animals", "Brainteasers", "Entertainment", "ForKids",
                 "History", "Geography", "Hobbies", "Newest", "Music" };
 
         Integer[] questions = { 5, 10, 15, 20 };
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item, topics);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTopic.setAdapter(adapter);
         spinnerTopic.setOnItemSelectedListener(this);
 
         ArrayAdapter<Integer> adapter2 = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item, questions);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerQuestions.setAdapter(adapter2);
         spinnerQuestions.setOnItemSelectedListener(this);
 

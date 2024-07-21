@@ -32,7 +32,7 @@ public class LoginFragment extends Fragment {
 
         regBtn.setOnClickListener(v -> {
             if (getActivity() instanceof FragmentDisplay){
-                ((FragmentDisplay)getActivity()).loadFragment(RegisterFragment.class, true);
+                ((FragmentDisplay)getActivity()).loadFragment(RegisterFragment.class);
             }
         });
 

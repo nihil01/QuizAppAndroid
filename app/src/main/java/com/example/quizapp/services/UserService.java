@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.quizapp.alertDialog.AlertDialogCreator;
+import com.example.quizapp.bottomNavigationEnum.Nav;
 import com.example.quizapp.frags.MainMenuFragment;
 import com.example.quizapp.models.UserModel;
 import com.example.quizapp.storage.TokenStorage;
@@ -86,7 +87,8 @@ public class UserService implements RequestUser {
                         Headers headers = response.headers();
                         String data = headers.get("Authorization");
                         if (data != null) storage.addToken(data);
-                        ((FragmentDisplay) ctx).loadFragment(MainMenuFragment.class, true);
+                        ((FragmentDisplay) ctx).loadFragment(MainMenuFragment.class);
+                        ((FragmentDisplay) ctx).operateBottomNavBar(Nav.NAV_SHOW);
                     } else if (response.code() == 429){
                     Toast.makeText(ctx, "Too many requests! Wait a bit",
                             Toast.LENGTH_SHORT).show();
@@ -125,7 +127,8 @@ public class UserService implements RequestUser {
                         Headers headers = response.headers();
                         String data = headers.get("Authorization");
                         if (data != null) storage.addToken(data);
-                        ((FragmentDisplay) ctx).loadFragment(MainMenuFragment.class, true);
+                        ((FragmentDisplay) ctx).loadFragment(MainMenuFragment.class);
+                        ((FragmentDisplay) ctx).operateBottomNavBar(Nav.NAV_SHOW);
                     }else if (response.code() == 429){
                         Toast.makeText(ctx, "Too many requests! Wait a bit",
                                 Toast.LENGTH_SHORT).show();

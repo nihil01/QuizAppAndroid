@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.quizapp.bottomNavigationEnum.Nav;
 import com.example.quizapp.R;
-import com.example.quizapp.alertDialog.AlertDialogCreator;
 import com.example.quizapp.services.UserService;
 import com.example.quizapp.utils.activityref.FragmentDisplay;
 
@@ -29,13 +29,15 @@ public class RegisterFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
+        ((FragmentDisplay)getActivity()).operateBottomNavBar(Nav.NAV_HIDE);
+
         Button loginBtn = view.findViewById(R.id.accountYes);
 
         // Set up the button listener inside the fragment
 
         loginBtn.setOnClickListener(v -> {
             if (getActivity() instanceof FragmentDisplay){
-                ((FragmentDisplay)getActivity()).loadFragment(LoginFragment.class, false);
+                ((FragmentDisplay)getActivity()).loadFragment(LoginFragment.class);
             }
         });
 

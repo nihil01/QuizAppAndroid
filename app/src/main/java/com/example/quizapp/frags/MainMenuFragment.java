@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,20 +33,20 @@ public class MainMenuFragment extends Fragment {
         Button shop = view.findViewById(R.id.btnShop);
 
         startQuiz.setOnClickListener(v -> {
-            ((FragmentDisplay) getActivity()).loadFragment(StartQuizFragment.class, true);
+            ((FragmentDisplay) getActivity()).loadFragment(StartQuizFragment.class);
         });
 
         profileMenu.setOnClickListener(v -> {
-            Toast.makeText(getActivity(), "In development!", Toast.LENGTH_SHORT).show();
+            ((FragmentDisplay) getActivity()).loadFragment(ProfileFragment.class);
         });
 
 
         friendMenu.setOnClickListener(v -> {
-            ((FragmentDisplay)getActivity()).loadFragment(FriendsFragment.class, true);
+            ((FragmentDisplay)getActivity()).loadFragment(FriendsFragment.class);
         });
 
         shop.setOnClickListener(v -> {
-            Toast.makeText(getActivity(), "In development!", Toast.LENGTH_LONG).show();
+            ((FragmentDisplay)getActivity()).loadFragment(ShopFragment.class);
         });
 
         return view;

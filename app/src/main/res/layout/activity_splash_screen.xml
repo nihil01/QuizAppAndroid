@@ -6,7 +6,7 @@
     <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:src="@drawable/rofl"
+        android:src="@drawable/quiz"
         android:id="@+id/logo_id"
         android:layout_centerInParent="true"
         />
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo_id"
         android:layout_centerHorizontal="true"
-        android:text="ROFL"
+        android:text="QUIZ FROM HoroshoWORLD"
         android:textSize="30dp"
         android:textColor="@color/white"/>
 </RelativeLayout>

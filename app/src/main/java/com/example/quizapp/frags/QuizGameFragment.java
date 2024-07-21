@@ -56,7 +56,7 @@ public class QuizGameFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState){
+                             @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_quiz_game, container, false);
 
         this.quizHeader = v.findViewById(R.id.quizHeader);
@@ -68,39 +68,42 @@ public class QuizGameFragment extends Fragment {
         this.quizNext = v.findViewById(R.id.btnNextQuestion);
         this.quizCheckAnswer = v.findViewById(R.id.btnCheckAnswer);
 
-        if (getArguments() != null){
+        if (getArguments() != null) {
 
             BalanceService balanceService = new BalanceService(getActivity());
+            this.quizNext.setEnabled(false);
 
             this.quizModel = (ArrayList<QuizModel>) getArguments().getSerializable("quizModelList");
             this.quizTopic = getArguments().getString("quizTopic");
             this.quizQuestionAmount = getArguments().getString("quizQuestionNum");
 
             this.initializeQuiz();
-            this.quizNext.setEnabled(false);
-            //check answer
+
+            // Check answer
             this.quizCheckAnswer.setOnClickListener(z -> {
-                if (this.currentCorrectAnswer.equals(this.currentSelectedAnswer)){
+                if (this.currentCorrectAnswer.equals(this.currentSelectedAnswer)) {
                     this.questionFlag = true;
-                    this.correct ++;
+                    this.correct++;
                     ((Button) v.findViewById(this.selectedAnswerButtonID)).setTextColor(Color.GREEN);
                     Toast.makeText(getActivity(), "CORRECT ANSWER!", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     ((Button) v.findViewById(this.selectedAnswerButtonID)).setTextColor(Color.RED);
 
                     this.questionFlag = true;
                     for (int i = 0; i < this.quizAnswers.getChildCount(); i++) {
                         RadioButton rb = (RadioButton) this.quizAnswers.getChildAt(i);
-                        if (rb.getText().toString().equals(this.currentCorrectAnswer)){
+                        if (rb.getText().toString().equals(this.currentCorrectAnswer)) {
                             rb.setTextColor(Color.GREEN);
                         }
                     }
                     Toast.makeText(getActivity(), "INCORRECT ANSWER!", Toast.LENGTH_SHORT).show();
-                    this.incorrect ++;
+                    this.incorrect++;
                 }
-                z.setEnabled(false);
 
-                if ((this.currentQuestion == this.quizModel.size()) && this.questionFlag){
+                updateButtonsStateAfterCheckAnswer();
+
+                if ((this.currentQuestion == this.quizModel.size()) && this.questionFlag) {
+                    this.quizNext.setEnabled(false);
                     ArrayList<HashMap<String, Integer>> data = new ArrayList<>();
                     HashMap<String, Integer> hash = new HashMap<>();
 
@@ -110,17 +113,16 @@ public class QuizGameFragment extends Fragment {
                     balanceService.sendHandleBalanceRequest(storage.getToken(), data);
 
                     new Handler().postDelayed(() -> this.quizNext.setEnabled(true), 1500);
-                }else{
-                    this.quizNext.setEnabled(true);
                 }
             });
 
             this.quizNext.setOnClickListener(z -> {
-                this.currentQuestion ++;
-                if (this.currentQuestion <= this.quizModel.size()){
+                this.currentQuestion++;
+                if (this.currentQuestion <= this.quizModel.size()) {
                     this.initializeQuiz();
-                }else{
-                    try{
+                    this.quizNext.setEnabled(false);
+                } else {
+                    try {
                         ShowResultsFragment frag = new ShowResultsFragment();
                         Bundle bundle = new Bundle();
 
@@ -129,20 +131,27 @@ public class QuizGameFragment extends Fragment {
                         bundle.putInt("incorrect", this.incorrect);
                         frag.setArguments(bundle);
 
-                        ((FragmentDisplay)getActivity()).loadFragment(frag, true);
-                    }catch (RuntimeException e){
+                        ((FragmentDisplay) getActivity()).loadFragment(frag);
+                    } catch (RuntimeException e) {
                         Log.e("frag_err", e.getMessage());
                     }
                     z.setEnabled(false);
                 }
             });
 
-        }else{
+        } else {
             Log.e("QUIZ_STATUS", "NOT OK");
         }
         this.vi = v;
         return v;
     }
+
+    // Method to update button states after answer check
+    private void updateButtonsStateAfterCheckAnswer() {
+        this.quizCheckAnswer.setEnabled(false); // Disable checkAnswer button after checking the answer
+        this.quizNext.setEnabled(true); // Enable nextQuestion button
+    }
+
 
     //Main initializer
     private void initializeQuiz(){

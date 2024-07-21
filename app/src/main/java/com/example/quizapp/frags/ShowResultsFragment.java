@@ -62,7 +62,7 @@ public class ShowResultsFragment extends Fragment {
             }
 
             btn.setOnClickListener(v -> {
-                ((FragmentDisplay)getActivity()).loadFragment(MainMenuFragment.class, true);
+                ((FragmentDisplay)getActivity()).loadFragment(MainMenuFragment.class);
             });
         }catch (RuntimeException e){
             Log.e("runtime_err", e.getMessage());

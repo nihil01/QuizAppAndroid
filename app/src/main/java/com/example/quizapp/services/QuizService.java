@@ -54,11 +54,11 @@ public class QuizService implements RequestQuiz{
                         QuizGameFragment frag = new QuizGameFragment();
                         frag.setArguments(newBundle);
 
-                        ((FragmentDisplay) ctx).loadFragment(frag, true);
+                        ((FragmentDisplay) ctx).loadFragment(frag);
                     }else if (response.code() == 401 || response.code() == 500){
                         Toast.makeText(ctx, "Token has been expired. Log in again", Toast.LENGTH_LONG).show();
                         new TokenStorage(ctx).removeToken();
-                        ((FragmentDisplay) ctx).loadFragment(RegisterFragment.class, true);
+                        ((FragmentDisplay) ctx).loadFragment(RegisterFragment.class);
                     }else{
                         Toast.makeText(ctx, "Something went wrong. Try again later. Code " + response.code(), Toast.LENGTH_SHORT).show();
                     }

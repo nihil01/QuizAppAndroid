@@ -2,18 +2,15 @@ package com.example.quizapp.utils.playSound;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.util.Log;
 
 import com.example.quizapp.R;
-
-import java.io.File;
 import java.util.Random;
 
 public class soundPlayer {
     private static final int[] soundRes = {
-            R.raw.coin1,
-            R.raw.coin2
+        R.raw.coin1,
+        R.raw.coin2
     };
 
     public static void play(Context ctx) {

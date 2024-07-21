@@ -1,12 +1,11 @@
 package com.example.quizapp.models;
 
-import java.io.Serializable;
-
 public class FriendsModel {
     private String credentials;
     private String balance;
     private String status;
     private String friendship_id;
+    private String error;
 
     public void setBalance(String balance) {
         this.balance = balance;
@@ -38,5 +37,13 @@ public class FriendsModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }
