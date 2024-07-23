@@ -64,6 +64,7 @@ public class HttpAdapter {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(CustomHttpClient.getCustomClient())
                 .build();
         return retrofit.create(RequestPurchase.class);
     }

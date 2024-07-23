@@ -1,7 +1,5 @@
 package com.example.quizapp.utils.network;
 
-import android.content.Context;
-
 import com.example.quizapp.models.QuizModel;
 
 import java.util.ArrayList;

@@ -112,9 +112,9 @@ public class ProfileFragment extends Fragment {
         profileBalance = view.findViewById(R.id.profileBalance);
         profileRegDate = view.findViewById(R.id.profileRegDate);
 
-        profileBalance.setText("Balance: " + String.valueOf(userInfoModel.getBalance()+"\uD83D\uDCB2"));
-        profileRegDate.setText("Registered: " + userInfoModel.getRegistered());
-        profileCredentials.setText("Credentials: " + userInfoModel.getCredentials());
+        profileBalance.setText(userInfoModel.getBalance()+"\uD83D\uDCB2");
+        profileRegDate.setText(userInfoModel.getRegistered());
+        profileCredentials.setText(userInfoModel.getCredentials());
     }
 
     public void sendPassChangeForm(LayoutInflater inflater){

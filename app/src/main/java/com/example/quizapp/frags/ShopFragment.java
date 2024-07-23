@@ -77,6 +77,7 @@ public class ShopFragment extends Fragment {
     private void processPurchase(){
         String phone = ((EditText)this.builder.findViewById(R.id.phoneDialogField)).getText().toString();
         String amount = ((EditText)this.builder.findViewById(R.id.amountField)).getText().toString();
+
         AlertDialogCreator alertDialogCreator =
                 new AlertDialogCreator(getLayoutInflater().inflate(R.layout.fragment_loader, null), getContext(), "Processing a purchase..");
         PurchaseService purchaseService = new PurchaseService(getContext(), alertDialogCreator);
@@ -88,7 +89,7 @@ public class ShopFragment extends Fragment {
             this.builder.dismiss();
             alertDialogCreator.setDialogWindow();
             purchaseService.makeAPurchase(tokenStorage.getToken(), phone, "BALANCE_TOP_UP", amount);
-                    }
+        }
         else {
             Toast.makeText(getContext(), "Invalid phone number. Try without +994", Toast.LENGTH_SHORT).show();
         }

@@ -14,7 +14,8 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_bar_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="88dp"
+        app:itemIconSize="15dp"
         app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

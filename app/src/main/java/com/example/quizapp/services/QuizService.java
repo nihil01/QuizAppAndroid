@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+
 import com.example.quizapp.alertDialog.AlertDialogCreator;
 import com.example.quizapp.frags.QuizGameFragment;
 import com.example.quizapp.frags.RegisterFragment;
 import com.example.quizapp.models.QuizModel;
+import com.example.quizapp.models.QuizViewModel;
 import com.example.quizapp.storage.TokenStorage;
 import com.example.quizapp.utils.activityref.FragmentDisplay;
 import com.example.quizapp.utils.network.RequestQuiz;
@@ -41,19 +45,15 @@ public class QuizService implements RequestQuiz{
                 try{
                     dialog.unsetDialogWindow();
                     if (response.isSuccessful()){
-
-                        Bundle newBundle = new Bundle();
-
                         ArrayList<QuizModel> quizList = new ArrayList<>(response.body());
 
-                        newBundle.putSerializable("quizModelList", quizList);
+                        QuizViewModel quizViewModel = new ViewModelProvider((ViewModelStoreOwner) ctx).get(QuizViewModel.class);
 
-                        newBundle.putString("quizTopic", quizBody.get(0).get("topic"));
-                        newBundle.putString("quizQuestionNum", quizBody.get(0).get("questionNum"));
+                        quizViewModel.setQuizModelList(quizList);
+                        quizViewModel.setQuizTopic(quizBody.get(0).get("topic"));
+                        quizViewModel.setQuizQuestionNum(quizBody.get(0).get("questionNum"));
 
                         QuizGameFragment frag = new QuizGameFragment();
-                        frag.setArguments(newBundle);
-
                         ((FragmentDisplay) ctx).loadFragment(frag);
                     }else if (response.code() == 401 || response.code() == 500){
                         Toast.makeText(ctx, "Token has been expired. Log in again", Toast.LENGTH_LONG).show();

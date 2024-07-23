@@ -18,9 +18,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.quizapp.R;
 import com.example.quizapp.models.QuizModel;
+import com.example.quizapp.models.QuizViewModel;
 import com.example.quizapp.services.BalanceService;
 import com.example.quizapp.storage.TokenStorage;
 import com.example.quizapp.utils.activityref.FragmentDisplay;
@@ -39,6 +41,7 @@ public class QuizGameFragment extends Fragment {
             quizQuestion;
     private Button quizNext, quizCheckAnswer;
 
+    private QuizViewModel quizViewModel;
     private ArrayList<QuizModel> quizModel;
     private RadioGroup quizAnswers;
     private ImageView quizImage;
@@ -68,14 +71,14 @@ public class QuizGameFragment extends Fragment {
         this.quizNext = v.findViewById(R.id.btnNextQuestion);
         this.quizCheckAnswer = v.findViewById(R.id.btnCheckAnswer);
 
-        if (getArguments() != null) {
+            this.quizViewModel = new ViewModelProvider(requireActivity()).get(QuizViewModel.class);
+
+            this.quizModel = quizViewModel.getQuizModelList();
+            this.quizTopic = quizViewModel.getQuizTopic();
+            this.quizQuestionAmount = quizViewModel.getQuizQuestionNum();
 
             BalanceService balanceService = new BalanceService(getActivity());
             this.quizNext.setEnabled(false);
-
-            this.quizModel = (ArrayList<QuizModel>) getArguments().getSerializable("quizModelList");
-            this.quizTopic = getArguments().getString("quizTopic");
-            this.quizQuestionAmount = getArguments().getString("quizQuestionNum");
 
             this.initializeQuiz();
 
@@ -138,10 +141,6 @@ public class QuizGameFragment extends Fragment {
                     z.setEnabled(false);
                 }
             });
-
-        } else {
-            Log.e("QUIZ_STATUS", "NOT OK");
-        }
         this.vi = v;
         return v;
     }
@@ -215,7 +214,6 @@ public class QuizGameFragment extends Fragment {
             this.quizAnswers.addView(button);
         }
     }
-
 
     //HEADER MANIPULATION
     private void setQuizHeader(){
